@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventBus
+public static class EventBus
 {
+    public static Action<Player> PlayerSpawnedEvent;
 }

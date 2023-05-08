@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class WinPopup : MonoBehaviour, IWinPopupDisplayable
+{
+    [SerializeField] private GameObject _view;
+    [SerializeField] private TMP_Text _winnerCoinsNumLabel;
+    [SerializeField] private TMP_Text _winnerNameLabel;
+    public void Show()
+    {
+        _view.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        _view.SetActive(false);
+    }
+
+    public void DisplayWinnerInfo(string name, int coins)
+    {
+        Show();
+        _winnerCoinsNumLabel.text = coins.ToString();
+        _winnerNameLabel.text = name.ToString();
+    }
+}
+
+public interface IWinPopupDisplayable
+{
+    public void DisplayWinnerInfo(string name, int coins);
+}

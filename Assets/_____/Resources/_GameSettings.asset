@@ -21,7 +21,7 @@ MonoBehaviour:
       Num: 0
     ClearSaves: 0
     Screencast: 0
-  GameSetings:
+  LoaderSettings:
     LoadingScene:
       sceneAsset: {fileID: 102900000, guid: febc6df18fc92164a9c8e1f37732f44b, type: 3}
       scenePath: Assets/_____/Scenes/Loading.unity
@@ -31,3 +31,15 @@ MonoBehaviour:
     GameScene:
       sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
       scenePath: Assets/_____/Scenes/Game.unity
+  PlayerSettings:
+    ShotsPerMinute: 60
+    MoveSpeed: 5
+  ProjectileSettings:
+    HittableLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    Speed: 10
+  Prefabs:
+    GameSession: {fileID: 1127890035809261378, guid: 32befc59aca264647960cb8410a9e083, type: 3}
+    PlayerView: {fileID: 8708326030133267158, guid: eaec8e04cef59af47af9c7f6979acf91, type: 3}
+    ProjectilePrefab: {fileID: 8663331797378144374, guid: 45e96dbb75e9dfc449267fc036b6d771, type: 3}

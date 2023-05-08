@@ -14,6 +14,14 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
     public MyLoader.Settings LoaderSettings;
 
     [HideLabel]
+    [TabGroup("Player Settings")]
+    public Player.Settings PlayerSettings;
+
+    [HideLabel]
+    [TabGroup("Projectile Settings")]
+    public Projectile.Settings ProjectileSettings;
+
+    [HideLabel]
     [TabGroup("Game Settings")]
     public GameSettings GameSettings; // DEprecated
 
@@ -26,6 +34,8 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
     {
         Container.BindInstance(GameMod).AsSingle().NonLazy();
         Container.BindInstance(LoaderSettings).AsSingle().NonLazy();
+        Container.BindInstance(PlayerSettings).AsSingle().NonLazy();
+        Container.BindInstance(ProjectileSettings).AsSingle().NonLazy();
         Container.BindInstance(GameSettings).AsSingle().NonLazy(); // Deprecated
         Container.BindInstance(Prefabs).AsSingle().NonLazy();
     }

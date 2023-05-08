@@ -12,11 +12,11 @@ TagManager:
   - 
   - Water
   - UI
-  - PlayerTrigger
-  - InteractableTrigger
-  - ShootingTarget
-  - PlayerTankCollider
-  - PlayerTankObserver
+  - PlayerHitbox
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

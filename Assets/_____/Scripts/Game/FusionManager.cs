@@ -12,25 +12,34 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
     private readonly ICreateRoomInvokable _createRoomCall;
     private readonly IJoinRoomInvokable _joinRoomCall;
     private readonly INetworkSceneManager _networkSceneManager;
+    private readonly ISceneLoadedEventInvokable _sceneLoadedInvokable;
     private readonly GameSettings _gameSettings;
-
-    private NetworkRunner _runner;
+    private readonly Prefabs _prefabs;
+    private readonly NetworkRunner _runner;
+    private readonly Player.Settings _playerSettings;
 
     public FusionManager(
         ICreateRoomInvokable createRoomCall,
         IJoinRoomInvokable joinRoomCall,
         INetworkSceneManager networkSceneManager,
-        GameSettings gameSettings)
+        ISceneLoadedEventInvokable sceneLoadedInvokable,
+        GameSettings gameSettings,
+        Prefabs prefabs,
+        NetworkRunner networkRunner,
+        Player.Settings playerSettings)
     {
         this._createRoomCall = createRoomCall;
         this._joinRoomCall = joinRoomCall;
         this._networkSceneManager = networkSceneManager;
+        this._sceneLoadedInvokable = sceneLoadedInvokable;
         this._gameSettings = gameSettings;
+        this._prefabs = prefabs;
+        this._runner = networkRunner;
+        this._playerSettings = playerSettings;
     }
 
     public void Initialize()
     {
-        _runner = new GameObject("Runner").AddComponent<NetworkRunner>();
         _runner.AddCallbacks(this);
         GameObject.DontDestroyOnLoad(_runner.gameObject);
 
@@ -42,12 +51,14 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
     {
         Debug.Log("Create room " + args.RoomName);
 
+        _sceneLoadedInvokable.MapLoadedEvent += OnGameSceneLoaded;
         var result = await _runner.StartGame(new StartGameArgs()
         {
             SessionName = args.RoomName,
             SceneManager = _networkSceneManager,
             GameMode = GameMode.Host,
         });
+
 
         if (result.Ok)
         {
@@ -57,6 +68,11 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
         {
             Debug.Log("Failed");
         }
+
+    }
+
+    private void OnGameSceneLoaded(MapIndex arg)
+    {
 
     }
 
@@ -107,6 +123,7 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
@@ -115,7 +132,6 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        Debug.Log("PlayerJoined: " + runner.IsClient);
 
         _runner.SetActiveScene((int)MapIndex.Game);
     }
@@ -130,6 +146,19 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     public void OnSceneLoadDone(NetworkRunner runner)
     {
+        switch ((MapIndex)(int)_runner.CurrentScene)
+        {
+            case MapIndex.Loading:
+
+                break;
+            case MapIndex.Lobby:
+                break;
+            case MapIndex.Game:
+                Debug.Log("Game loaded");
+                break;
+            default:
+                break;
+        }
     }
 
     public void OnSceneLoadStart(NetworkRunner runner)

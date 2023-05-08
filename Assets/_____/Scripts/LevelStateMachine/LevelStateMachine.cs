@@ -19,7 +19,6 @@ public class LevelStateMachine : ITickable, IInitializable, IFixedTickable
     private LevelState[] _states;
 
     public LevelStateMachine(
-        EventBus eventBus,
         CamerasController camerasController,
         GameSettings gameSettings,
         SimpleTouchInput simpleTouchInput,

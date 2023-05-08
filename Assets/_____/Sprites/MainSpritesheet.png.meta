@@ -1,0 +1,1810 @@
+fileFormatVersion: 2
+guid: cd20138c3d25c084da4d3c18b86b77c9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2962274285517505976
+    second: Doodle
+  - first:
+      213: 3642895639730166632
+    second: DefaultPlatform
+  - first:
+      213: 2202548682660783183
+    second: WeakPlatform
+  - first:
+      213: -23278179230069286
+    second: WeakPlatofrmPart_6
+  - first:
+      213: 244142420968812104
+    second: WeakPlatofrmPart_5
+  - first:
+      213: -8412514572834569097
+    second: WeakPlatofrmPart_7
+  - first:
+      213: 4912935602268301503
+    second: WeakPlatofrmPart_4
+  - first:
+      213: -7856937210559000545
+    second: WeakPlatofrmPart_8
+  - first:
+      213: 3533210348745159635
+    second: WeakPlatofrmPart_3
+  - first:
+      213: 7009047352155469417
+    second: WeakPlatofrmPart_9
+  - first:
+      213: -4687062712678210921
+    second: WeakPlatofrmPart_2
+  - first:
+      213: -9208903337494026507
+    second: WeakPlatofrmPart_10
+  - first:
+      213: -869806318593493254
+    second: WeakPlatofrmPart_1
+  - first:
+      213: 9220185712161070121
+    second: WeakPlatofrmPart_11
+  - first:
+      213: 7165362317656098137
+    second: WeakPlatofrmPart_0
+  - first:
+      213: -743660659168677957
+    second: PlatformMask
+  - first:
+      213: -4354661749709651901
+    second: FinishPlatformPattern
+  - first:
+      213: 5721370851426047111
+    second: CheckpointFlag_0
+  - first:
+      213: 420809369429108924
+    second: CheckpointFlag_1
+  - first:
+      213: 7498546773331249786
+    second: CheckpointFlag_2
+  - first:
+      213: -5866300073982049482
+    second: MainSprite_RightLeg
+  - first:
+      213: -4371981566196874575
+    second: MainSprite_RightArm
+  - first:
+      213: -1721614106895654116
+    second: MainSprite_LeftArm
+  - first:
+      213: 1927544656186411968
+    second: MainSprite_Head
+  - first:
+      213: -3836271160332344365
+    second: MainSprite_Body
+  - first:
+      213: -4829120846345411339
+    second: MainSprite_LeftLeg
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DoodlePlayer
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1008
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84a747c6b33e3e6d0800000000000000
+      internalID: -2962274285517505976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DefaultPlatform
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 997
+        width: 32
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86b9fef884a2e8230800000000000000
+      internalID: 3642895639730166632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatform
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 997
+        width: 32
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4420867b56019e10800000000000000
+      internalID: 2202548682660783183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_6
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 997
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: add49fb8e9c4daff0800000000000000
+      internalID: -23278179230069286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_5
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 1001
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e23740d3e536300800000000000000
+      internalID: 244142420968812104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 997
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7740662419eb04b80800000000000000
+      internalID: -8412514572834569097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_4
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1001
+        width: 7
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8629186e04e2440800000000000000
+      internalID: 4912935602268301503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_8
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 997
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f10151e1c3d86f290800000000000000
+      internalID: -7856937210559000545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1001
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d370b9a71c780130800000000000000
+      internalID: 3533210348745159635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_9
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 997
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9667e176e63254160800000000000000
+      internalID: 7009047352155469417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1001
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79226d2cb4534feb0800000000000000
+      internalID: -4687062712678210921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_10
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 997
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f662c59437633080800000000000000
+      internalID: -9208903337494026507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1001
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af638dcf2c3dde3f0800000000000000
+      internalID: -869806318593493254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 997
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c1e78fd0ea4ff70800000000000000
+      internalID: 9220185712161070121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeakPlatofrmPart_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1001
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9558cde601b707360800000000000000
+      internalID: 7165362317656098137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlatformMask
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 982
+        width: 32
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbf61d0129cfda5f0800000000000000
+      internalID: -743660659168677957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FinishPlatformPattern
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 966
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 340439be5322193c0800000000000000
+      internalID: -4354661749709651901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckpointFlag_0
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 1003
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 784168be974666f40800000000000000
+      internalID: 5721370851426047111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckpointFlag_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1003
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb86af654e307d500800000000000000
+      internalID: 420809369429108924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckpointFlag_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1003
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a8f04bf80301860800000000000000
+      internalID: 7498546773331249786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_RightLeg
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1008
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 633c378e927b69ea0800000000000000
+      internalID: -5866300073982049482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_RightArm
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1013
+        width: 3
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b28746ede99353c0800000000000000
+      internalID: -4371981566196874575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_LeftArm
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1013
+        width: 3
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13ee2e57199b18e0800000000000000
+      internalID: -1721614106895654116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_Head
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1019
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cb81b8f6a300ca10800000000000000
+      internalID: 1927544656186411968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_Body
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1013
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d3a05284b3d2cac0800000000000000
+      internalID: -3836271160332344365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSprite_LeftLeg
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1008
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f4e5201d248bfcb0800000000000000
+      internalID: -4829120846345411339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_idle0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 944
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 856e21fc69a989b4b851ccabe5cda24d
+      internalID: -1451485401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullet_pistol
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 982
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df06698b746afd04fb036af39b6f300a
+      internalID: 776874716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_die0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 944
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb9e1b90d8773d747a0122daba915de6
+      internalID: 571907011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_die1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 944
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 156c1c09243aa7a4d8320f054eae0397
+      internalID: 667091234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_die2
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 944
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3b6651bedfeced4d92f3075b2dfe87e
+      internalID: -873980026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_die3
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 944
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8210b949f963494a8a4b6b15f203545
+      internalID: 928704640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoodleMonster_idle1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 928
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8277c5c600d8eab4c922e38901438c8c
+      internalID: 499482740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 880
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e5440e595966d94ba88c3ff823d5567
+      internalID: 1329202390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 880
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced365b0364f569459e4647c50a29594
+      internalID: 2079036747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 880
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf4000bf11873449ae3244fbacb61d9
+      internalID: 1724237158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 880
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43308649e964537428d19aa9abb919b4
+      internalID: 542172938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 880
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9980fa202c9d1054681a319b3eaab272
+      internalID: 1041471578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a9cb6aa9c3ec840b1981c9099232d9
+      internalID: 358365338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697d4f882107b6c418799ed2d628f842
+      internalID: 778189844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1adee50c7dfb328478383e14d43d4b1a
+      internalID: 1702279932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e11a57218ec8f844add043775a00289
+      internalID: -1101403851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce06f2c65fdb18e468150fd4fc92880a
+      internalID: -1812199528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4544a717bb2816d4992b86be0c446b89
+      internalID: -198351070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_spawn0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4760d2901affe2940b62044cb3bdf739
+      internalID: 1124025926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4428a47f989b59246a4af991012fb04e
+      internalID: 976462691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8118fef784c2b40ad995121c1bf5c9
+      internalID: -250768528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6037fa42d14a7074eac2ecd58594e1fb
+      internalID: -1856841827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle3
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d12723c9a8fb2804aafbd0538530bc14
+      internalID: 599065345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f927bdbc703643b46a19ef9aa44907c8
+      internalID: 1349605872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puddle_idle5
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 848
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a07c3385f9c7a047bb5bf189e26471e
+      internalID: 719023472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DefaultTile
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 816
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dff7c97879db9e4f9984419ce190268
+      internalID: -786531358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gem_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 970
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18484fb5d20a0ec4fb05be1be812801f
+      internalID: -1504610147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gem_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 970
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf7dc3081420e1468be39b671bc6e3c
+      internalID: -377469251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gem_2
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 970
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84cff2ef1382e2e4781c27c54ba74818
+      internalID: -756713618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainSpritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 920
+        width: 61
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d367090ca07b6c428b92cc6376c16e7
+      internalID: 425310666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Damage
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 976
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ce9543fcfa762741b798405e972878d
+      internalID: 642229743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_FireRate
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 976
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28659bc31c537834c9145d2e2f5dabc4
+      internalID: -829989675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Speed
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 976
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf09ee3facc090649a77a78c96fdfaf2
+      internalID: 88329233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_AutoAim
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 976
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c814b4cb3fe2beb47b95e3e47158cc95
+      internalID: 906314515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Fragmentation
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 976
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcda8be5ee87e8d4ba1f0d185c8fc3bb
+      internalID: 1199973503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Penetration
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 960
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bcd6a2a8ebb27440a171bcd00406606
+      internalID: 965102098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Explosion
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 960
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0540a65f55aeba84caf2e3817b544639
+      internalID: 600241150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Size
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 960
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ea19eacd5146d04ea95ba7fd598a2fc
+      internalID: 1652417292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Puddle
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 960
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e81f60c2c4fc843b9ec332424269e2
+      internalID: -2035707253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Spread
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 960
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00a9baacbdcbbf546bd29f5746b8f857
+      internalID: -1444955919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Ice
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 944
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5214c9f7f8be54cbcc2843a29f364f
+      internalID: 1635691964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Fire
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 944
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc05b9bbf899f404b9fe1f5ce9c3c808
+      internalID: -2067211323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Lightning
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 944
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7744c81f350a71046be0226048f29948
+      internalID: 1211474802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcon_Vampirism
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 944
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00523b1f5b0995040960cac3d590347a
+      internalID: -1323211920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerShooter
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 984
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cbb10a026eced74e98bbe0b032b2fae
+      internalID: -1532033343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 56e493a821581704a91efcf106e5aa57
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DoodleMonster_LeftBody: -399529012
+      UpgradeIcon_Fire: -2067211323
+      WeakPlatofrmPart_0: 7165362317656098137
+      MainSpritesheet_5: 805075276
+      DoodleMonster_idle0: -1451485401
+      MainSprite_LeftArm: -1721614106895654116
+      Puddle_idle0: 976462691
+      UpgradeIcon_Fragmentation: 1199973503
+      Puddle_spawn2: -1812199528
+      FinishPlatformPattern: -4354661749709651901
+      DoodleMonster_RightLeg: -708580035
+      UpgradeIcon_AutoAim: 906314515
+      Explosion_4: 1329202390
+      UpgradeIcon_Ice: 1635691964
+      DoodleMonster_die2: -873980026
+      MainSprite_Head: 1927544656186411968
+      Gem_1: -377469251
+      Explosion_2: 1724237158
+      MainSpritesheet_1: 425310666
+      UpgradeIcon_Explosion: 600241150
+      WeakPlatofrmPart_11: 9220185712161070121
+      UpgradeIcon_Puddle: -2035707253
+      DefaultTile: -786531358
+      PlatformMask: -743660659168677957
+      DoodleMonster_die1: 667091234
+      MainSprite_LeftLeg: -4829120846345411339
+      Puddle_idle1: -250768528
+      Puddle_idle4: 1349605872
+      WeakPlatform: 2202548682660783183
+      UpgradeIcon_Lightning: 1211474802
+      WeakPlatofrmPart_1: -869806318593493254
+      WeakPlatofrmPart_4: 4912935602268301503
+      Puddle_spawn5: 778189844
+      CheckpointFlag_0: 5721370851426047111
+      DoodleMonster_RightBody: 963505696
+      MainSprite_RightArm: -4371981566196874575
+      Explosion_3: 2079036747
+      WeakPlatofrmPart_5: 244142420968812104
+      DefaultPlatform: 3642895639730166632
+      Puddle_idle5: 719023472
+      WeakPlatofrmPart_7: -8412514572834569097
+      WeakPlatofrmPart_8: -7856937210559000545
+      Puddle_idle3: 599065345
+      MainSprite_Body: -3836271160332344365
+      WeakPlatofrmPart_10: -9208903337494026507
+      MainSpritesheet_6: 883138623
+      DoodleMonster_RightArm: 1372631616
+      Puddle_spawn0: 1124025926
+      UpgradeIcon_Vampirism: -1323211920
+      WeakPlatofrmPart_3: 3533210348745159635
+      CheckpointFlag_1: 420809369429108924
+      DoodleMonster_LeftArm: -115054959
+      MainSpritesheet_4: -115054959
+      Puddle_spawn4: 1702279932
+      Explosion_1: 542172938
+      UpgradeIcon_Speed: 88329233
+      DoodleMonster_die3: 928704640
+      DoodlePlayer: -2962274285517505976
+      CheckpointFlag_2: 7498546773331249786
+      DoodleMonster_die0: 571907011
+      Bullet_pistol: 776874716
+      Puddle_idle2: -1856841827
+      PlayerShooter: -1532033343
+      WeakPlatofrmPart_2: -4687062712678210921
+      Puddle_spawn1: -198351070
+      DoodleMonster_idle1: 499482740
+      WeakPlatofrmPart_6: -23278179230069286
+      MainSpritesheet_7: -1107889472
+      Gem_2: -756713618
+      Explosion_0: 1041471578
+      Gem_0: -1504610147
+      UpgradeIcon_Damage: -1961119823
+      WeakPlatofrmPart_9: 7009047352155469417
+      MainSprite_RightLeg: -5866300073982049482
+      Puddle_spawn6: 358365338
+      DoodleMonser_Head: -202706438
+      DoodleMonster_LeftLeg: -309369723
+      UpgradeIcon_Size: 1652417292
+      UpgradeIcon_Penetration: 965102098
+      UpgradeIcon_Spread: -1444955919
+      Puddle_spawn3: -1101403851
+      UpgradeIcon_FireRate: -829989675
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
