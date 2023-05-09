@@ -46,10 +46,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8246148777738524093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019a06f9b0160a34890b877520e2ccd5, type: 3}
+  m_Script: {fileID: 11500000, guid: c1092b199d010524285bbf6ec2965376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolationDataSource: 3
+  _interpolationDataSource: 0
   _IsCollected:
     _value: 0
 --- !u!114 &8246148777738524094
