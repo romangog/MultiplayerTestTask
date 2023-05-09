@@ -85,6 +85,7 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
             SessionName = args.RoomName,
             SceneManager = _networkSceneManager,
             GameMode = GameMode.Client,
+
         });
 
         if (result.Ok)

@@ -7,12 +7,11 @@ using System;
 
 public class Player : NetworkBehaviour
 {
-    public Action PlayerCollectedCoinEvent;
+    public Action<CollectableCoin> PlayerCollectedCoinEvent;
 
     [Networked(OnChanged = nameof(OnNameChanged))] public NetworkString<_32> Name { get; set; }
+    [Networked(OnChanged = nameof(OnCollectedCoinsChanged))] public int CollectedCoins { get; set; }
 
-
-    [Networked] public int CollectedCoins { get; set; }
     [Networked] public float Health { get; set; }
 
     [SerializeField] private HitboxRoot _hitboxRoot;
@@ -36,6 +35,12 @@ public class Player : NetworkBehaviour
     private static void OnNameChanged(Changed<Player> changed)
     {
         changed.Behaviour.gameObject.name = changed.Behaviour.Name.Value;
+        EventBus.PlayerNameChangedEvent?.Invoke(changed.Behaviour);
+    }
+
+    private static void OnCollectedCoinsChanged(Changed<Player> changed)
+    {
+        EventBus.PlayerCollectedCoinsChangedEvent?.Invoke(changed.Behaviour);
     }
 
     public override void Spawned()
@@ -48,46 +53,77 @@ public class Player : NetworkBehaviour
         ResetFireTimer();
     }
 
-    public void Move(Vector3 movement)
-    {
-        this.transform.position += movement;
-        _lookRotatingRoot.transform.rotation = Quaternion.LookRotation(movement, Vector3.back);
-    }
+
 
     [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_CollectCoin()
+    public void RPC_CALL(CollectableCoin coinObj)
     {
-        PlayerCollectedCoinEvent?.Invoke();
+        Debug.Log("RPC RECIEVED AT STATE AUTHORYTY");
+        //PlayerCollectedCoinEvent?.Invoke(coinObj);
     }
 
     public override void FixedUpdateNetwork()
     {
         //if (!Runner.IsServer) return;
+        //if (!Object.HasStateAuthority) return;
         if (Runner.TryGetInputForPlayer<PlayerInput>(Object.InputAuthority, out PlayerInput input))
         {
-            Vector3 movement = new Vector3(input.Horizontal, input.Vertical, 0) * _settings.MoveSpeed * Runner.DeltaTime;
-            if (movement.sqrMagnitude > 0)
-                Move(movement);
-            if (_fireTimer.ExpiredOrNotRunning(Runner))
+            Vector3 inputVector = new Vector3(input.Horizontal, input.Vertical, 0);
+            Vector3 movement = inputVector * _settings.MoveSpeed * Runner.DeltaTime;
+            if (inputVector.sqrMagnitude > 0.1f)
             {
-                ResetFireTimer();
-                RPC_Fire(movement);
+                Move(movement);
+                Rotate(inputVector);
+            }
+
+
+            if (Object.HasStateAuthority)
+            {
+                if (_fireTimer.ExpiredOrNotRunning(Runner))
+                {
+                    ResetFireTimer();
+                    //RPC_Fire(movement);
+                    Fire(inputVector);
+                }
             }
         }
+        if (Object.HasStateAuthority)
+            CollectCoins();
+    }
 
-        CollectCoins();
+    public void Move(Vector3 movement)
+    {
+        this.transform.position += movement;
+    }
+
+    private void Rotate(Vector3 inputVector)
+    {
+        _lookRotatingRoot.transform.rotation = Quaternion.LookRotation(inputVector, Vector3.back);
     }
 
     private void CollectCoins()
     {
-        bool collectedCoin = false;
-        //Runner.LagCompensation.OverlapSphere(
-        //    _hitboxRoot.Hitboxes[0].transform.position,
-        //    _hitboxRoot.Hitboxes[0].BoxExtents,
-        //    Quaternion.identity)
+        List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
+        Runner.LagCompensation.OverlapSphere(
+            _hitboxRoot.Hitboxes[0].transform.position,
+            _hitboxRoot.Hitboxes[0].SphereRadius,
+            Object.InputAuthority,
+            hits,
+            _settings.CollectableCoinsMask);
 
-        if (collectedCoin)
-            PlayerCollectedCoinEvent?.Invoke();
+        foreach (var hit in hits)
+        {
+            var coinObject = hit.GameObject.GetComponent<CollectableCoin>();
+            //Debug.Log("Coin collected before checking: " + coinObject.IsCollected);
+            //Debug.Log("Coin id: " + coinObject.Object.Id);
+            if (coinObject.IsCollected) continue;
+            //Debug.Log("Hit coin, collect");
+            //Debug.Log("coin pos: " + hit.Point);
+            coinObject.IsCollected = true;
+            CollectedCoins++;
+            //Runner.Despawn(coinObject.Object);
+            //RPC_CollectCoin(coinObject);
+        }
     }
 
     internal void OnHit()
@@ -104,11 +140,11 @@ public class Player : NetworkBehaviour
         projectile.Shoot(Object.InputAuthority);
     }
 
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_Fire(Vector3 direction)
-    {
-        Fire(direction);
-    }
+    //[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
+    //public void RPC_Fire(Vector3 direction)
+    //{
+    //    Fire(direction);
+    //}
 
     private void ResetFireTimer()
     {
@@ -120,6 +156,7 @@ public class Player : NetworkBehaviour
     {
         public float ShotsPerMinute;
         public float MoveSpeed;
+        public LayerMask CollectableCoinsMask;
     }
 }
 

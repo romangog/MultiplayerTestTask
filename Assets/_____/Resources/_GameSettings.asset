@@ -34,6 +34,9 @@ MonoBehaviour:
   PlayerSettings:
     ShotsPerMinute: 60
     MoveSpeed: 5
+    CollectableCoinsMask:
+      serializedVersion: 2
+      m_Bits: 128
   ProjectileSettings:
     HittableLayerMask:
       serializedVersion: 2
@@ -43,3 +46,4 @@ MonoBehaviour:
     GameSession: {fileID: 1127890035809261378, guid: 32befc59aca264647960cb8410a9e083, type: 3}
     PlayerView: {fileID: 8708326030133267158, guid: eaec8e04cef59af47af9c7f6979acf91, type: 3}
     ProjectilePrefab: {fileID: 8663331797378144374, guid: 45e96dbb75e9dfc449267fc036b6d771, type: 3}
+    Coin: {fileID: 8246148777738524081, guid: c8737f2d8cfdc9b4fafe699ee1759cb5, type: 3}

@@ -21,13 +21,17 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
 
     private Dictionary<PlayerRef, Player> _players = new Dictionary<PlayerRef, Player>();
 
+    [Networked] private TickTimer _gameStartTimer { get; set; }
+
+    private bool _IsGameStarted;
+
     [Inject]
     private void Construct(IObjectPool<Projectile> projectilesPool,
         Prefabs prefabs,
         Player.Settings playerSettings,
         IPlayerCoinsDisplayable playerCoinsDisplayable,
         IPlayerNameDisplayable playerNameDisplayable,
-        IOnPlayerJoinedInitializable [] playerJoinedInitializable,
+        IOnPlayerJoinedInitializable[] playerJoinedInitializable,
         Joystick joystick)
     {
         _projectilesPool = projectilesPool;
@@ -38,12 +42,54 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
         _playerJoinedInitializers = playerJoinedInitializable;
         _joystick = joystick;
         EventBus.PlayerSpawnedEvent += OnPlayerSpawned;
+        EventBus.PlayerNameChangedEvent += OnPlayerNameChanged;
+        EventBus.PlayerCollectedCoinsChangedEvent += OnPlayerCollectedCoinsChanged;
+        EventBus.CoinCollectedEvent += OnCoinCollected;
+    }
+
+
+
+    public override void FixedUpdateNetwork()
+    {
+        if (!Object.HasStateAuthority) return;
+        if (Input.GetKeyDown(KeyCode.Space))
+            SpawnCoins();
+
+        if (_gameStartTimer.Expired(Runner) && !_IsGameStarted)
+        {
+            SpawnCoins();
+            _IsGameStarted = true;
+        }
     }
 
     private void OnPlayerSpawned(Player player)
     {
         player.Construct(_playerSettings, _projectilesPool);
         player.Activate();
+        if (player.Object.InputAuthority == Runner.LocalPlayer)
+        {
+            _playerCoinsDisplay.SetCoins(player.CollectedCoins);
+        }
+    }
+
+    public void OnPlayerNameChanged(Player player)
+    {
+        if (player.Object.InputAuthority == Runner.LocalPlayer)
+            _playerNameDisplay.SetName(player.Name.Value);
+
+    }
+
+    private void OnPlayerCollectedCoinsChanged(Player player)
+    {
+        if (player.Object.InputAuthority == Runner.LocalPlayer)
+            _playerCoinsDisplay.SetCoins(player.CollectedCoins);
+    }
+
+    private void OnCoinCollected(CollectableCoin coin)
+    {
+        coin.gameObject.SetActive(false);
+        if (Object.HasStateAuthority)
+            Runner.Despawn(coin.Object);
     }
 
     public static void UpdateNumberText(Changed<GameSession> changed)
@@ -83,35 +129,43 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
         // Deprecated
     }
 
+    private void SpawnCoins()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 position = new Vector3(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-8f, 8f), 0f);
+            var coin = Runner.Spawn(_prefabs.Coin, position: position);
+        }
+    }
+
     private void SpawnPlayer(PlayerRef player)
     {
         var playerView = Runner.Spawn(_prefabs.PlayerView, inputAuthority: player);
         Runner.SetPlayerObject(player, playerView.Object);
         _players.Add(player, playerView);
-        
-        playerView.PlayerCollectedCoinEvent += () => OnPlayerCollectedCoin(player);
-        playerView.Name = "Player" +  _players.Count.ToString();
-        RPC_UpdatePlayerNameInfo();
+        playerView.PlayerCollectedCoinEvent += (coin) => OnPlayerCollectedCoin(player, coin);
+        playerView.Name = "Player" + _players.Count.ToString();
+        //RPC_UpdatePlayerNameInfo();
+
+        if (_players.Count >= 2)
+        {
+            StartGameTimer();
+        }
     }
 
-    // StateAuthority
-    private void OnPlayerCollectedCoin(PlayerRef player)
+    // State
+    private void StartGameTimer()
+    {
+        _gameStartTimer = TickTimer.CreateFromSeconds(Runner, 3f);
+    }
+
+    // state
+    private void OnPlayerCollectedCoin(PlayerRef player, CollectableCoin coin)
     {
         _players[player].CollectedCoins++;
-        RPC_UpdatePlayerCoinsInfo();
+        //Runner.Despawn(coin.Object);
     }
 
-    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.InputAuthority)]
-    public void RPC_UpdatePlayerCoinsInfo()
-    {
-        _playerCoinsDisplay.SetCoins(_players[Object.InputAuthority].CollectedCoins);
-    }
-
-    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.InputAuthority)]
-    public void RPC_UpdatePlayerNameInfo()
-    {
-        _playerNameDisplay.SetName(_players[Object.InputAuthority].Name.Value);
-    }
 
     private void ChangeNumber()
     {

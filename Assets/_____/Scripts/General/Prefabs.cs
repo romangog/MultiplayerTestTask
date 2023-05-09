@@ -11,4 +11,5 @@ public class Prefabs
     public GameSession GameSession;    
     public Player PlayerView;    
     public Projectile ProjectilePrefab;    
+    public CollectableCoin Coin;    
 }
