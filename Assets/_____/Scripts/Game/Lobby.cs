@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
 using Zenject;
-using UnityEngine.SceneManagement;
 
 
 public class Lobby : INetworkRunnerCallbacks, IInitializable
@@ -13,7 +11,6 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
     private readonly ICreateRoomInvokable _createRoomCall;
     private readonly IJoinRoomInvokable _joinRoomCall;
     private readonly INetworkSceneManager _networkSceneManager;
-    private readonly ISceneLoadedEventInvokable _sceneLoadedInvokable;
     private readonly IConnectionInteractionBlockable _connectionInteractionBlockable;
     private readonly IConnectionInfoDisplayable _connectionInfoDisplayable;
     private NetworkRunner _runner;
@@ -29,7 +26,6 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
         this._createRoomCall = createRoomCall;
         this._joinRoomCall = joinRoomCall;
         this._networkSceneManager = networkSceneManager;
-        this._sceneLoadedInvokable = sceneLoadedInvokable;
         this._connectionInteractionBlockable = connectionInteractionBlockable;
         this._connectionInfoDisplayable = connectionInfoDisplayable;
     }
@@ -43,28 +39,6 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
         _connectionInteractionBlockable.CancelConnectionCallEvent += OnConnectionCancelled;
     }
 
-    private async void OnCreateRoomCalled(CreateRoomCallArgs args)
-    {
-        _connectionInteractionBlockable.BlockInteraction();
-        _connectionInfoDisplayable.DisplayConnectionInfo($"Creating room \"{args.RoomName}\"...");
-        _sceneLoadedInvokable.MapLoadedEvent += OnGameSceneLoaded;
-        var result = await _runner.StartGame(new StartGameArgs()
-        {
-            SessionName = args.RoomName,
-            SceneManager = _networkSceneManager,
-            GameMode = GameMode.Host
-        });
-    }
-
-    private void OnConnectionCancelled()
-    {
-        // Simplest (and the only possible?) way to interrupt connection attempt
-        // https://forum.photonengine.com/discussion/19991/is-there-a-way-to-handle-re-connection-in-fusion-or-do-we-have-to-handle-it-manually
-        _runner.Shutdown();
-        InitRunner();
-
-    }
-
     public void InitRunner()
     {
         _runner = new GameObject("Runner").AddComponent<NetworkRunner>();
@@ -72,9 +46,16 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
         GameObject.DontDestroyOnLoad(_runner.gameObject);
     }
 
-    private void OnGameSceneLoaded(MapIndex arg)
+    private async void OnCreateRoomCalled(CreateRoomCallArgs args)
     {
-
+        _connectionInteractionBlockable.BlockInteraction();
+        _connectionInfoDisplayable.DisplayConnectionInfo($"Creating room \"{args.RoomName}\"...");
+        var result = await _runner.StartGame(new StartGameArgs()
+        {
+            SessionName = args.RoomName,
+            SceneManager = _networkSceneManager,
+            GameMode = GameMode.Host
+        });
     }
 
     private async void OnJoinRoomCalled(JoinRoomCallArgs args)
@@ -88,6 +69,21 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
             GameMode = GameMode.Client,
         });
     }
+
+    private void OnConnectionCancelled()
+    {
+        // Simplest (and the only possible?) way to interrupt connection attempt
+        // https://forum.photonengine.com/discussion/19991/is-there-a-way-to-handle-re-connection-in-fusion-or-do-we-have-to-handle-it-manually
+        _runner.Shutdown();
+        InitRunner();
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        _runner.SetActiveScene((int)MapIndex.Game);
+    }
+
+    #region UNUSED_CALLBACKS
 
     public void OnConnectedToServer(NetworkRunner runner)
     {
@@ -122,11 +118,6 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
     {
     }
 
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-    {
-        _runner.SetActiveScene((int)MapIndex.Game);
-    }
-
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
     }
@@ -153,5 +144,7 @@ public class Lobby : INetworkRunnerCallbacks, IInitializable
 
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
     {
+
     }
+    #endregion
 }

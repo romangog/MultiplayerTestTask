@@ -1,14 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 using Fusion;
 using System;
 
 public class Player : NetworkBehaviour
 {
-    public Action<CollectableCoin> PlayerCollectedCoinEvent;
-
     [Networked(OnChanged = nameof(OnNameChanged))] public NetworkString<_32> Name { get; set; }
     [Networked(OnChanged = nameof(OnCollectedCoinsChanged))] public int CollectedCoins { get; set; }
     [Networked(OnChanged = nameof(OnHealthChanged))] public float Health { get; set; }
@@ -34,6 +30,13 @@ public class Player : NetworkBehaviour
         _settings = settings;
         _projectilesPool = projectilesPool;
     }
+
+    public override void Spawned()
+    {
+        EventBus.PlayerSpawnedEvent?.Invoke(this);
+    }
+
+    #region VALUES OBSERVERS
 
     private static void OnNameChanged(Changed<Player> changed)
     {
@@ -63,10 +66,8 @@ public class Player : NetworkBehaviour
         player.gameObject.SetActive(player.IsAlive);
     }
 
-    public override void Spawned()
-    {
-        EventBus.PlayerSpawnedEvent?.Invoke(this);
-    }
+    #endregion
+
 
     public void Activate()
     {
@@ -76,7 +77,8 @@ public class Player : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (!IsAlive && _IsActive) return;
+        if (!IsAlive || !_IsActive) return;
+
         if (Runner.TryGetInputForPlayer<PlayerInput>(Object.InputAuthority, out PlayerInput input))
         {
             Vector3 inputVector = new Vector3(input.Horizontal, input.Vertical, 0);
@@ -86,15 +88,17 @@ public class Player : NetworkBehaviour
                 Move(movement);
                 Rotate(inputVector);
             }
-            if (Object.HasStateAuthority)
+        }
+
+        if (Object.HasStateAuthority)
+        {
+            if (_fireTimer.ExpiredOrNotRunning(Runner))
             {
-                if (_fireTimer.ExpiredOrNotRunning(Runner))
-                {
-                    ResetFireTimer();
-                    Fire(inputVector);
-                }
+                ResetFireTimer();
+                Fire();
             }
         }
+
         CollectCoins();
     }
 
@@ -145,7 +149,7 @@ public class Player : NetworkBehaviour
         EventBus.PlayerDiedEvent?.Invoke(this);
     }
 
-    private void Fire(Vector3 direction)
+    private void Fire()
     {
         Projectile projectile = _projectilesPool.Get();
         projectile.transform.rotation = _bulletSpawnPoint.rotation;
@@ -170,16 +174,10 @@ public class Player : NetworkBehaviour
     }
 }
 
-public enum PlayerButtons
-{
-    Fire = 0
-}
-
 public struct PlayerInput : INetworkInput
 {
     public float Vertical;
     public float Horizontal;
-    public NetworkButtons Buttons;
 }
 
 

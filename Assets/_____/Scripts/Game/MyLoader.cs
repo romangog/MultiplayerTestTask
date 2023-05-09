@@ -39,8 +39,6 @@ public class MyLoader : NetworkSceneManagerBase, ISceneLoadedEventInvokable
 
 	protected override IEnumerator SwitchScene(SceneRef prevScene, SceneRef newScene, FinishedLoadingDelegate finished)
 	{
-		Debug.Log($"Switching Scene from {prevScene} to {newScene}");
-
 		_loadScreen.SetActive(true);
 
 		yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
@@ -58,14 +56,11 @@ public class MyLoader : NetworkSceneManagerBase, ISceneLoadedEventInvokable
 
 		yield return _zenjectLoader.LoadSceneAsync(path, LoadSceneMode.Additive, null, LoadSceneRelationship.Child);
 		var loadedScene = SceneManager.GetSceneByPath(path);
-		Debug.Log($"Loaded scene {path}: {loadedScene}");
 		sceneObjects = FindNetworkObjects(loadedScene, disable: false);
 
 		// Delay one frame
 		yield return null;
 		finished(sceneObjects);
-
-		Debug.Log($"Switched Scene from {prevScene} to {newScene} - loaded {sceneObjects.Count} scene objects");
 
 		_loadScreen.SetActive(false);
 
