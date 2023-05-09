@@ -11,16 +11,21 @@ public class Player : NetworkBehaviour
 
     [Networked(OnChanged = nameof(OnNameChanged))] public NetworkString<_32> Name { get; set; }
     [Networked(OnChanged = nameof(OnCollectedCoinsChanged))] public int CollectedCoins { get; set; }
+    [Networked(OnChanged = nameof(OnHealthChanged))] public float Health { get; set; }
+    [Networked(OnChanged = nameof(OnColorChanged))] public int ColorIndex { get; set; }
+    [Networked(OnChanged = nameof(OnAliveChanged))] public NetworkBool IsAlive { get; set; }
 
-    [Networked] public float Health { get; set; }
+    [Networked] private bool _IsActive { get; set; }
+    [Networked] private TickTimer _fireTimer { get; set; }
 
     [SerializeField] private HitboxRoot _hitboxRoot;
     [SerializeField] private NetworkTransform _lookRotatingRoot;
     [SerializeField] private Transform _bulletSpawnPoint;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     private Settings _settings;
     private IObjectPool<Projectile> _projectilesPool;
-    private TickTimer _fireTimer;
+
 
     public void Construct(
         Settings settings,
@@ -28,8 +33,6 @@ public class Player : NetworkBehaviour
     {
         _settings = settings;
         _projectilesPool = projectilesPool;
-        CollectedCoins = 0;
-        Health = 1f;
     }
 
     private static void OnNameChanged(Changed<Player> changed)
@@ -43,6 +46,23 @@ public class Player : NetworkBehaviour
         EventBus.PlayerCollectedCoinsChangedEvent?.Invoke(changed.Behaviour);
     }
 
+    private static void OnHealthChanged(Changed<Player> changed)
+    {
+        EventBus.PlayerHealthChangedEvent?.Invoke(changed.Behaviour);
+    }
+
+    private static void OnColorChanged(Changed<Player> changed)
+    {
+        var player = changed.Behaviour;
+        player._spriteRenderer.color = player._settings.SpriteColors[player.ColorIndex];
+    }
+
+    private static void OnAliveChanged(Changed<Player> changed)
+    {
+        var player = changed.Behaviour;
+        player.gameObject.SetActive(player.IsAlive);
+    }
+
     public override void Spawned()
     {
         EventBus.PlayerSpawnedEvent?.Invoke(this);
@@ -51,21 +71,12 @@ public class Player : NetworkBehaviour
     public void Activate()
     {
         ResetFireTimer();
-    }
-
-
-
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_CALL(CollectableCoin coinObj)
-    {
-        Debug.Log("RPC RECIEVED AT STATE AUTHORYTY");
-        //PlayerCollectedCoinEvent?.Invoke(coinObj);
+        _IsActive = true;
     }
 
     public override void FixedUpdateNetwork()
     {
-        //if (!Runner.IsServer) return;
-        //if (!Object.HasStateAuthority) return;
+        if (!IsAlive && _IsActive) return;
         if (Runner.TryGetInputForPlayer<PlayerInput>(Object.InputAuthority, out PlayerInput input))
         {
             Vector3 inputVector = new Vector3(input.Horizontal, input.Vertical, 0);
@@ -75,20 +86,16 @@ public class Player : NetworkBehaviour
                 Move(movement);
                 Rotate(inputVector);
             }
-
-
             if (Object.HasStateAuthority)
             {
                 if (_fireTimer.ExpiredOrNotRunning(Runner))
                 {
                     ResetFireTimer();
-                    //RPC_Fire(movement);
                     Fire(inputVector);
                 }
             }
         }
-        if (Object.HasStateAuthority)
-            CollectCoins();
+        CollectCoins();
     }
 
     public void Move(Vector3 movement)
@@ -114,22 +121,28 @@ public class Player : NetworkBehaviour
         foreach (var hit in hits)
         {
             var coinObject = hit.GameObject.GetComponent<CollectableCoin>();
-            //Debug.Log("Coin collected before checking: " + coinObject.IsCollected);
-            //Debug.Log("Coin id: " + coinObject.Object.Id);
+            coinObject.gameObject.SetActive(false);
             if (coinObject.IsCollected) continue;
-            //Debug.Log("Hit coin, collect");
-            //Debug.Log("coin pos: " + hit.Point);
-            coinObject.IsCollected = true;
-            CollectedCoins++;
-            //Runner.Despawn(coinObject.Object);
-            //RPC_CollectCoin(coinObject);
+            if (Object.HasStateAuthority)
+            {
+                coinObject.IsCollected = true;
+                CollectedCoins++;
+            }
         }
     }
 
     internal void OnHit()
     {
-        Health -= 0.1f;
-        Debug.Log(name + " Hit");
+        Health = Mathf.MoveTowards(Health, 0f, _settings.Damage);
+        if (Health == 0f)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        EventBus.PlayerDiedEvent?.Invoke(this);
     }
 
     private void Fire(Vector3 direction)
@@ -139,12 +152,6 @@ public class Player : NetworkBehaviour
         projectile.transform.position = _bulletSpawnPoint.position;
         projectile.Shoot(Object.InputAuthority);
     }
-
-    //[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    //public void RPC_Fire(Vector3 direction)
-    //{
-    //    Fire(direction);
-    //}
 
     private void ResetFireTimer()
     {
@@ -156,7 +163,10 @@ public class Player : NetworkBehaviour
     {
         public float ShotsPerMinute;
         public float MoveSpeed;
+        public float Damage;
+        public float MaxHealth;
         public LayerMask CollectableCoinsMask;
+        public Color[] SpriteColors;
     }
 }
 

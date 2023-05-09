@@ -38,11 +38,13 @@ public class Projectile : NetworkBehaviour
 
         foreach (var hit in hits)
         {
-            if(hit.GameObject.TryGetComponent(out Player player))
+            if(hit.GameObject.transform.parent.TryGetComponent(out Player player))
             {
                 if(player.Object.InputAuthority != _senderPlayer)
                 {
                     player.OnHit();
+                    this.gameObject.SetActive(false);
+                    Runner.Despawn(this.Object);
                 }
                 break;
             }

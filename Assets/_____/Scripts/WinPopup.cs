@@ -18,15 +18,16 @@ public class WinPopup : MonoBehaviour, IWinPopupDisplayable
         _view.SetActive(false);
     }
 
-    public void DisplayWinnerInfo(string name, int coins)
+    public void DisplayWinnerInfo(string name, int coins, Color winnerColor)
     {
         Show();
         _winnerCoinsNumLabel.text = coins.ToString();
         _winnerNameLabel.text = name.ToString();
+        _winnerNameLabel.color = winnerColor;
     }
 }
 
 public interface IWinPopupDisplayable
 {
-    public void DisplayWinnerInfo(string name, int coins);
+    public void DisplayWinnerInfo(string name, int coins, Color winnerColor);
 }

@@ -6,18 +6,21 @@ using Fusion.Sockets;
 using System;
 using DG.Tweening;
 using Zenject;
+using System.Linq;
 
 public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
 {
+    [SerializeField] private Transform[] _spawnPoints;
     private IObjectPool<Projectile> _projectilesPool;
     private Prefabs _prefabs;
     private Player.Settings _playerSettings;
     private IPlayerCoinsDisplayable _playerCoinsDisplay;
     private IPlayerNameDisplayable _playerNameDisplay;
     private IOnPlayerJoinedInitializable[] _playerJoinedInitializers;
+    private IPlayerHealthDisplayable _playerHealthDisplayable;
+    private IWinPopupDisplayable _winPopupDisplayable;
+    private IGameStatusDisplayable _gameStatusDisplayable;
     private Joystick _joystick;
-
-    [Networked(OnChanged = nameof(UpdateNumberText))] public int Number { get; set; }
 
     private Dictionary<PlayerRef, Player> _players = new Dictionary<PlayerRef, Player>();
 
@@ -31,7 +34,10 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
         Player.Settings playerSettings,
         IPlayerCoinsDisplayable playerCoinsDisplayable,
         IPlayerNameDisplayable playerNameDisplayable,
+        IPlayerHealthDisplayable playerHealthDisplayable,
         IOnPlayerJoinedInitializable[] playerJoinedInitializable,
+        IWinPopupDisplayable winPopupDisplayable,
+        IGameStatusDisplayable gameStatusDisplayable,
         Joystick joystick)
     {
         _projectilesPool = projectilesPool;
@@ -40,24 +46,32 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
         _playerCoinsDisplay = playerCoinsDisplayable;
         _playerNameDisplay = playerNameDisplayable;
         _playerJoinedInitializers = playerJoinedInitializable;
+        _playerHealthDisplayable = playerHealthDisplayable;
+        _winPopupDisplayable = winPopupDisplayable;
+        _gameStatusDisplayable = gameStatusDisplayable;
         _joystick = joystick;
         EventBus.PlayerSpawnedEvent += OnPlayerSpawned;
         EventBus.PlayerNameChangedEvent += OnPlayerNameChanged;
         EventBus.PlayerCollectedCoinsChangedEvent += OnPlayerCollectedCoinsChanged;
         EventBus.CoinCollectedEvent += OnCoinCollected;
+        EventBus.PlayerHealthChangedEvent += OnHealthChanged;
+        EventBus.PlayerDiedEvent += OnPlayerDied;
     }
-
-
 
     public override void FixedUpdateNetwork()
     {
-        if (!Object.HasStateAuthority) return;
-        if (Input.GetKeyDown(KeyCode.Space))
-            SpawnCoins();
+
+        if (_gameStartTimer.IsRunning && !_IsGameStarted)
+        {
+            _gameStatusDisplayable.DisplayGameStatus($"Game starts in {Mathf.RoundToInt(_gameStartTimer.RemainingTime(Runner).Value)}...");
+        }
 
         if (_gameStartTimer.Expired(Runner) && !_IsGameStarted)
         {
-            SpawnCoins();
+            Debug.LogWarning("Display zero status");
+            _gameStatusDisplayable.DisplayGameStatus("");
+            if (Object.HasStateAuthority)
+                StartGame();
             _IsGameStarted = true;
         }
     }
@@ -65,24 +79,27 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
     private void OnPlayerSpawned(Player player)
     {
         player.Construct(_playerSettings, _projectilesPool);
-        player.Activate();
-        if (player.Object.InputAuthority == Runner.LocalPlayer)
-        {
-            _playerCoinsDisplay.SetCoins(player.CollectedCoins);
-        }
+
+        if (_IsGameStarted)
+            player.Activate();
     }
 
     public void OnPlayerNameChanged(Player player)
     {
         if (player.Object.InputAuthority == Runner.LocalPlayer)
             _playerNameDisplay.SetName(player.Name.Value);
-
     }
 
     private void OnPlayerCollectedCoinsChanged(Player player)
     {
         if (player.Object.InputAuthority == Runner.LocalPlayer)
             _playerCoinsDisplay.SetCoins(player.CollectedCoins);
+    }
+
+    private void OnHealthChanged(Player player)
+    {
+        if (player.Object.InputAuthority == Runner.LocalPlayer)
+            _playerHealthDisplayable.SetHealth(player.Health);
     }
 
     private void OnCoinCollected(CollectableCoin coin)
@@ -92,9 +109,23 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
             Runner.Despawn(coin.Object);
     }
 
-    public static void UpdateNumberText(Changed<GameSession> changed)
+    private void OnPlayerDied(Player player)
     {
-        ScreenLog.Log("Number", changed.Behaviour.Number.ToString());
+        player.IsAlive = false;
+        if (!Object.HasStateAuthority) return;
+        _players.Remove(player.Object.InputAuthority);
+        var alivePlayers = _players.Where(x => x.Value.IsAlive);
+        if (alivePlayers.Count() == 1)
+        {
+            var winner = alivePlayers.First().Value;
+            RPC_EndGame(winner);
+        }
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_EndGame(Player winner)
+    {
+        _winPopupDisplayable.DisplayWinnerInfo(winner.name, winner.CollectedCoins, _playerSettings.SpriteColors[winner.ColorIndex]);
     }
 
     public override void Spawned()
@@ -119,19 +150,16 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
         {
 
         }
-
-        if (Object.HasStateAuthority)
-            DOTween.Sequence()
-                .PrependInterval(3f)
-                .AppendCallback(ChangeNumber)
-                .SetLoops(-1);
-
-        // Deprecated
     }
 
-    private void SpawnCoins()
+    private void StartGame()
     {
-        for (int i = 0; i < 10; i++)
+        foreach (var player in _players)
+        {
+            player.Value.Activate();
+        }
+        // Spawn Coins
+        for (int i = 0; i < 11; i++)
         {
             Vector3 position = new Vector3(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-8f, 8f), 0f);
             var coin = Runner.Spawn(_prefabs.Coin, position: position);
@@ -140,36 +168,28 @@ public class GameSession : NetworkBehaviour, INetworkRunnerCallbacks
 
     private void SpawnPlayer(PlayerRef player)
     {
-        var playerView = Runner.Spawn(_prefabs.PlayerView, inputAuthority: player);
+        Vector3 spawnPoint = _spawnPoints[_players.Count % _spawnPoints.Length].position;
+        var playerView = Runner.Spawn(_prefabs.PlayerView, inputAuthority: player, position: spawnPoint);
         Runner.SetPlayerObject(player, playerView.Object);
-        _players.Add(player, playerView);
-        playerView.PlayerCollectedCoinEvent += (coin) => OnPlayerCollectedCoin(player, coin);
+        playerView.ColorIndex = _players.Count % _spawnPoints.Length;
         playerView.Name = "Player" + _players.Count.ToString();
-        //RPC_UpdatePlayerNameInfo();
-
+        playerView.Health = _playerSettings.MaxHealth;
+        playerView.CollectedCoins = 0;
+        playerView.IsAlive = true;
+        _players.Add(player, playerView);
         if (_players.Count >= 2)
         {
             StartGameTimer();
         }
+        else
+        {
+            _gameStatusDisplayable.DisplayGameStatus($"Waiting for a second player");
+        }
     }
 
-    // State
     private void StartGameTimer()
     {
         _gameStartTimer = TickTimer.CreateFromSeconds(Runner, 3f);
-    }
-
-    // state
-    private void OnPlayerCollectedCoin(PlayerRef player, CollectableCoin coin)
-    {
-        _players[player].CollectedCoins++;
-        //Runner.Despawn(coin.Object);
-    }
-
-
-    private void ChangeNumber()
-    {
-        Number = UnityEngine.Random.Range(0, 1000);
     }
 
     public void SceneLoadDone()

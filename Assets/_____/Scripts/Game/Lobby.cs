@@ -7,68 +7,69 @@ using System;
 using Zenject;
 using UnityEngine.SceneManagement;
 
-public class FusionManager : INetworkRunnerCallbacks, IInitializable
+
+public class Lobby : INetworkRunnerCallbacks, IInitializable
 {
     private readonly ICreateRoomInvokable _createRoomCall;
     private readonly IJoinRoomInvokable _joinRoomCall;
     private readonly INetworkSceneManager _networkSceneManager;
     private readonly ISceneLoadedEventInvokable _sceneLoadedInvokable;
-    private readonly GameSettings _gameSettings;
-    private readonly Prefabs _prefabs;
-    private readonly NetworkRunner _runner;
-    private readonly Player.Settings _playerSettings;
+    private readonly IConnectionInteractionBlockable _connectionInteractionBlockable;
+    private readonly IConnectionInfoDisplayable _connectionInfoDisplayable;
+    private NetworkRunner _runner;
 
-    public FusionManager(
+    public Lobby(
         ICreateRoomInvokable createRoomCall,
         IJoinRoomInvokable joinRoomCall,
         INetworkSceneManager networkSceneManager,
         ISceneLoadedEventInvokable sceneLoadedInvokable,
-        GameSettings gameSettings,
-        Prefabs prefabs,
-        NetworkRunner networkRunner,
-        Player.Settings playerSettings)
+        IConnectionInteractionBlockable connectionInteractionBlockable,
+        IConnectionInfoDisplayable connectionInfoDisplayable)
     {
         this._createRoomCall = createRoomCall;
         this._joinRoomCall = joinRoomCall;
         this._networkSceneManager = networkSceneManager;
         this._sceneLoadedInvokable = sceneLoadedInvokable;
-        this._gameSettings = gameSettings;
-        this._prefabs = prefabs;
-        this._runner = networkRunner;
-        this._playerSettings = playerSettings;
+        this._connectionInteractionBlockable = connectionInteractionBlockable;
+        this._connectionInfoDisplayable = connectionInfoDisplayable;
     }
 
     public void Initialize()
     {
-        _runner.AddCallbacks(this);
-        GameObject.DontDestroyOnLoad(_runner.gameObject);
+        InitRunner();
 
         _createRoomCall.CreateRoomCallEvent += OnCreateRoomCalled;
         _joinRoomCall.JoinRoomCallEvent += OnJoinRoomCalled;
+        _connectionInteractionBlockable.CancelConnectionCallEvent += OnConnectionCancelled;
     }
 
     private async void OnCreateRoomCalled(CreateRoomCallArgs args)
     {
-        Debug.Log("Create room " + args.RoomName);
-
+        _connectionInteractionBlockable.BlockInteraction();
+        _connectionInfoDisplayable.DisplayConnectionInfo($"Creating room \"{args.RoomName}\"...");
         _sceneLoadedInvokable.MapLoadedEvent += OnGameSceneLoaded;
         var result = await _runner.StartGame(new StartGameArgs()
         {
             SessionName = args.RoomName,
             SceneManager = _networkSceneManager,
-            GameMode = GameMode.Host,
+            GameMode = GameMode.Host
         });
+    }
 
+    private void OnConnectionCancelled()
+    {
+        // Simplest (and the only possible?) way to interrupt connection attempt
+        // https://forum.photonengine.com/discussion/19991/is-there-a-way-to-handle-re-connection-in-fusion-or-do-we-have-to-handle-it-manually
+        _runner.Shutdown();
+        InitRunner();
 
-        if (result.Ok)
-        {
-            Debug.Log("Ok");
-        }
-        else
-        {
-            Debug.Log("Failed");
-        }
+    }
 
+    public void InitRunner()
+    {
+        _runner = new GameObject("Runner").AddComponent<NetworkRunner>();
+        _runner.AddCallbacks(this);
+        GameObject.DontDestroyOnLoad(_runner.gameObject);
     }
 
     private void OnGameSceneLoaded(MapIndex arg)
@@ -78,24 +79,14 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     private async void OnJoinRoomCalled(JoinRoomCallArgs args)
     {
-        Debug.Log("Join room " + args.RoomName);
-
+        _connectionInteractionBlockable.BlockInteraction();
+        _connectionInfoDisplayable.DisplayConnectionInfo($"Joining room \"{args.RoomName}\"...");
         var result = await _runner.StartGame(new StartGameArgs()
         {
             SessionName = args.RoomName,
             SceneManager = _networkSceneManager,
             GameMode = GameMode.Client,
-
         });
-
-        if (result.Ok)
-        {
-            Debug.Log("Ok");
-        }
-        else
-        {
-            Debug.Log("Failed");
-        }
     }
 
     public void OnConnectedToServer(NetworkRunner runner)
@@ -133,7 +124,6 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-
         _runner.SetActiveScene((int)MapIndex.Game);
     }
 
@@ -147,19 +137,6 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
 
     public void OnSceneLoadDone(NetworkRunner runner)
     {
-        switch ((MapIndex)(int)_runner.CurrentScene)
-        {
-            case MapIndex.Loading:
-
-                break;
-            case MapIndex.Lobby:
-                break;
-            case MapIndex.Game:
-                Debug.Log("Game loaded");
-                break;
-            default:
-                break;
-        }
     }
 
     public void OnSceneLoadStart(NetworkRunner runner)
@@ -177,9 +154,4 @@ public class FusionManager : INetworkRunnerCallbacks, IInitializable
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
     {
     }
-}
-
-public interface ISceneLoader
-{
-    public void SwitchScene();
 }

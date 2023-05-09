@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerInfoView : MonoBehaviour , IPlayerCoinsDisplayable, IPlayerNameDisplayable
+public class PlayerInfoView : MonoBehaviour , IPlayerCoinsDisplayable, IPlayerNameDisplayable, IPlayerHealthDisplayable
 {
     [SerializeField] private TMP_Text _playerNameLabel;
     [SerializeField] private TMP_Text _coinsNumLabel;
+    [SerializeField] private Image _playerHealthBar;
 
     public void SetCoins(int coinsNum)
     {
@@ -16,6 +18,11 @@ public class PlayerInfoView : MonoBehaviour , IPlayerCoinsDisplayable, IPlayerNa
     public void SetName(string name)
     {
         _playerNameLabel.text = name;
+    }
+
+    public void SetHealth(float health)
+    {
+        _playerHealthBar.fillAmount = health;
     }
 }
 
@@ -28,3 +35,9 @@ public interface IPlayerNameDisplayable
 {
     public void SetName(string name);
 }
+
+public interface IPlayerHealthDisplayable
+{
+    public void SetHealth(float health);
+}
+

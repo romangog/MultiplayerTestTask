@@ -34,9 +34,16 @@ MonoBehaviour:
   PlayerSettings:
     ShotsPerMinute: 60
     MoveSpeed: 5
+    Damage: 0.1
+    MaxHealth: 1
     CollectableCoinsMask:
       serializedVersion: 2
       m_Bits: 128
+    SpriteColors:
+    - {r: 0, g: 0.18800211, b: 1, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0.040236473, g: 1, b: 0, a: 1}
+    - {r: 1, g: 0.7775183, b: 0, a: 1}
   ProjectileSettings:
     HittableLayerMask:
       serializedVersion: 2
@@ -47,3 +54,4 @@ MonoBehaviour:
     PlayerView: {fileID: 8708326030133267158, guid: eaec8e04cef59af47af9c7f6979acf91, type: 3}
     ProjectilePrefab: {fileID: 8663331797378144374, guid: 45e96dbb75e9dfc449267fc036b6d771, type: 3}
     Coin: {fileID: 8246148777738524081, guid: c8737f2d8cfdc9b4fafe699ee1759cb5, type: 3}
+    Runner: {fileID: 0}

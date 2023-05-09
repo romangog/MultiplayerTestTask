@@ -9,7 +9,7 @@ public class LobbySceneInstaller : MonoInstaller
     {
         //Container.BindInterfacesAndSelfTo<LevelStateMachine>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<SimpleTouchInput>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<FusionManager>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<Lobby>().AsSingle().NonLazy();
 
     }
 }

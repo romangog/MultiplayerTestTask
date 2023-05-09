@@ -12,4 +12,5 @@ public class Prefabs
     public Player PlayerView;    
     public Projectile ProjectilePrefab;    
     public CollectableCoin Coin;    
+    public NetworkRunner Runner;    
 }
