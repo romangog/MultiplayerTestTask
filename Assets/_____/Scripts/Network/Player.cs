@@ -18,6 +18,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private NetworkTransform _lookRotatingRoot;
     [SerializeField] private Transform _bulletSpawnPoint;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private NetworkTransform _thisTransform;
 
     private Settings _settings;
     private IObjectPool<Projectile> _projectilesPool;
@@ -86,35 +87,36 @@ public class Player : NetworkBehaviour
             if (inputVector.sqrMagnitude > 0.1f)
             {
                 Move(movement);
-                    Rotate(inputVector);
+                Rotate(inputVector);
             }
         }
 
-        if (Object.HasStateAuthority)
+        if (_fireTimer.ExpiredOrNotRunning(Runner))
         {
-            if (_fireTimer.ExpiredOrNotRunning(Runner))
-            {
-                ResetFireTimer();
-                Fire();
-            }
+            ResetFireTimer();
+            if (Object.HasInputAuthority)
+                RPC_Fire(_bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
         }
+
 
         CollectCoins();
     }
 
     public void Move(Vector3 movement)
     {
-        this.transform.position += movement;
+        _thisTransform.TeleportToPosition(_thisTransform.transform.position + movement);
+
         // Constrain
-        this.transform.position = new Vector3(
-            Mathf.Max(-4f, Mathf.Min(this.transform.position.x, 4f)),
-            Mathf.Max(-8f, Mathf.Min(this.transform.position.y, 8f)),
-            0f);
+        _thisTransform.TeleportToPosition(new Vector3(
+            Mathf.Max(-4f, Mathf.Min(_thisTransform.transform.position.x, 4f)),
+            Mathf.Max(-8f, Mathf.Min(_thisTransform.transform.position.y, 8f)),
+            0f));
     }
 
     private void Rotate(Vector3 inputVector)
     {
-        _lookRotatingRoot.transform.rotation = Quaternion.LookRotation(inputVector, Vector3.back);
+        _lookRotatingRoot.TeleportToRotation(Quaternion.LookRotation(inputVector, Vector3.back));
+        // _lookRotatingRoot.transform.rotation = ;
     }
 
     private void CollectCoins()
@@ -153,12 +155,13 @@ public class Player : NetworkBehaviour
     {
         EventBus.PlayerDiedEvent?.Invoke(this);
     }
-
-    private void Fire()
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
+    public void RPC_Fire(Vector3 pos, Quaternion rot)
     {
+        Debug.Log(name + ": sent rpc");
         Projectile projectile = _projectilesPool.Get();
-        projectile.transform.rotation = _bulletSpawnPoint.rotation;
-        projectile.transform.position = _bulletSpawnPoint.position;
+        projectile.transform.rotation = rot;
+        projectile.transform.position = pos;
         projectile.Shoot(Object.InputAuthority);
     }
 

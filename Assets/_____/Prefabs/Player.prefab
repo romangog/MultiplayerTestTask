@@ -381,6 +381,7 @@ MonoBehaviour:
   _lookRotatingRoot: {fileID: 2451673201515922793}
   _bulletSpawnPoint: {fileID: 8746113430717156806}
   _spriteRenderer: {fileID: 8708326029122149657}
+  _thisTransform: {fileID: 306468029}
 --- !u!114 &930345537017836569
 MonoBehaviour:
   m_ObjectHideFlags: 0
